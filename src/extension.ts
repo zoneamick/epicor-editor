@@ -86,9 +86,9 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.workspace.saveAll(false);
       var openFolder = vscode.workspace.rootPath;
       delete require.cache[
-        require.resolve(openFolder + "/CustomizationInfo.json")
+        require.resolve(openFolder + "\\CustomizationInfo.json")
       ];
-      const customSettings = require(openFolder + "/CustomizationInfo.json");
+      const customSettings = require(openFolder + "\\CustomizationInfo.json");
 
       var argsAry: string[] = [];
       argsAry.push("-c");
@@ -171,9 +171,9 @@ export function activate(context: vscode.ExtensionContext) {
       omniSharpHelper();
       var openFolder = vscode.workspace.rootPath;
       delete require.cache[
-        require.resolve(openFolder + "/CustomizationInfo.json")
+        require.resolve(openFolder + "\\CustomizationInfo.json")
       ];
-      const customSettings = require(openFolder + "/CustomizationInfo.json");
+      const customSettings = require(openFolder + "\\CustomizationInfo.json");
       VersionCheck(epicorSettings);
       var argsAry: string[] = [];
       argsAry.push("-c");
@@ -264,7 +264,7 @@ export function deactivate() {}
 
 function updateStatusBarItem(): void {
   var openFolder = vscode.workspace.rootPath;
-  const customSettings = require(openFolder + "/CustomizationInfo.json");
+  const customSettings = require(openFolder + "\\CustomizationInfo.json");
   if (customSettings !== undefined) {
     myStatusBarItem.text = `Epicor Customization ${
       customSettings.Key1
@@ -276,7 +276,7 @@ function updateStatusBarItem(): void {
 }
 
 var omniSharpHelper = function() {
-  var omniSharp = vscode.extensions.getExtension("ms-vscode.csharp");
+  var omniSharp = vscode.extensions.getExtension("ms-dotnettools.csharp");
   if (omniSharp !== undefined) {
     if (omniSharp.isActive === false) {
       omniSharp.activate().then(function() {
@@ -299,13 +299,13 @@ var VersionCheck = function(epicorSettings: EpicorSettings) {
         try {
           delete require.cache[
             require.resolve(
-              epicorSettings.epicorClientFolder + "/CustomizationEditor.json"
+              epicorSettings.epicorClientFolder + "\\CustomizationEditor.json"
             )
           ];
         } catch (err) {}
         try {
           const currentVersion = require(epicorSettings.epicorClientFolder +
-            "/CustomizationEditor.json");
+            "\\CustomizationEditor.json");
           if (
             currentVersion === undefined ||
             publishedVersion.Version !== currentVersion.Version
@@ -349,8 +349,8 @@ var LaunchInEpicor = function(
   toolbox: boolean
 ) {
   var openFolder = vscode.workspace.rootPath;
-  delete require.cache[require.resolve(openFolder + "/CustomizationInfo.json")];
-  const customSettings = require(openFolder + "/CustomizationInfo.json");
+  delete require.cache[require.resolve(openFolder + "\\CustomizationInfo.json")];
+  const customSettings = require(openFolder + "\\CustomizationInfo.json");
 
   var argsAry: string[] = [];
   argsAry.push("-c");
